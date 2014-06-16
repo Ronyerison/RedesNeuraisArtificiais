@@ -1,7 +1,7 @@
 /**
  * 
  */
-package br.ufpi.easii.testes;
+package br.ufpi.easii.redeNeural;
 
 /**
  * @author Ronyerison
