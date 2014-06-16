@@ -43,8 +43,8 @@ public class Neuronio {
 	@SuppressWarnings("unused")
 	public void gerarPesos(int tam){
 		this.pesos = new Double[tam];
-		for (Double peso : this.pesos) {
-			peso = new Random().nextDouble()*1;
+		for (int i=0;i<this.pesos.length;i++) {
+			this.pesos[i] = new Random().nextDouble()*1;
 		}
 	}
 	
