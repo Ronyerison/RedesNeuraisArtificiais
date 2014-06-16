@@ -15,7 +15,6 @@ public class CamadaIntermediaria extends Camada{
 	
 	public void calcularGradiente(Camada camada){
 		for (int i = 0; i < neuronios.size(); i++) {
-			
 		}
 	}
 	
