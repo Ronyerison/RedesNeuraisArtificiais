@@ -40,11 +40,16 @@ public class Neuronio {
 		this.pesoBias = new Random().nextDouble()*1;
 	}
 	
-	@SuppressWarnings("unused")
 	public void gerarPesos(int tam){
 		this.pesos = new Double[tam];
 		for (int i=0;i<this.pesos.length;i++) {
 			this.pesos[i] = new Random().nextDouble()*1;
+		}
+	}
+	
+	public void ajustarPesos(Double taxaDeAprendizado, Double[] x, Double gradiente){
+		for (int i = 0; i < this.getPesos().length; i++) {
+			this.pesos[i] += taxaDeAprendizado * gradiente * x[i]; 
 		}
 	}
 	

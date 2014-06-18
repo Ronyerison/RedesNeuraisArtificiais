@@ -66,6 +66,12 @@ public class Camada {
 		}
 	}
 	
+	public void ajustarPesos(Double taxaDeAprendizado, Double[] x){
+		for (int i = 0; i < this.getQuantNeuronios(); i++) {
+			this.neuronios.get(i).ajustarPesos(taxaDeAprendizado, x, vetorGradiente[i]);
+		}
+	}
+	
 	/**
 	 * @return the neuronios
 	 */
