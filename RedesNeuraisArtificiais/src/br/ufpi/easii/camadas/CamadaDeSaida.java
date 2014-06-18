@@ -19,4 +19,6 @@ public class CamadaDeSaida extends Camada{
 		}
 		this.somarGradiente();
 	}
+	
+	
 }

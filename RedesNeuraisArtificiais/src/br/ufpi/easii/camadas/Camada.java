@@ -60,6 +60,12 @@ public class Camada {
 		
 	}
 	
+	public void gerarPesos(int quantEntradas){
+		for (int i = 0; i < this.getQuantNeuronios(); i++) {
+			this.neuronios.get(i).gerarPesos(quantEntradas);
+		}
+	}
+	
 	/**
 	 * @return the neuronios
 	 */

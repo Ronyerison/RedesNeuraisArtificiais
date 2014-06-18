@@ -23,4 +23,6 @@ public class CamadaIntermediaria extends Camada {
 			vetorGradiente[i] = neuronios.get(i).derivada() * somaTemp;
 		}
 	}
+	
+	
 }
