@@ -14,8 +14,8 @@ public class CamadaDeSaida extends Camada{
 	}
 
 	public void calcularGradiente(Double[] esperado){
-		for (int i = 0; i < esperado.length; i++) {
-			this.vetorGradiente[i] = esperado[i] - vetorSaida[i];
+		for (int i = 0; i < neuronios.size(); i++) {
+			this.vetorGradiente[i] = (esperado[i] - vetorSaida[i])* neuronios.get(i).derivada();
 		}
 		this.somarGradiente();
 	}

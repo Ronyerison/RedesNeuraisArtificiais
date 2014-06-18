@@ -52,9 +52,12 @@ public class Camada {
 
 	public void somarGradiente(){
 		gradienteCamada = 0.0;
-		for (Double gradiente : this.vetorGradiente) {
-			gradienteCamada += gradiente;
+		for (int i = 0; i < neuronios.size(); i++) {
+			for (int j = 0; j < neuronios.get(i).getPesos().length; j++) {
+				gradienteCamada += vetorGradiente[i] * neuronios.get(i).getPesos()[j];
+			}
 		}
+		
 	}
 	
 	/**

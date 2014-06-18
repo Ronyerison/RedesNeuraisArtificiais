@@ -61,6 +61,9 @@ public class Neuronio {
 		this.saida = funcaoDeAtivacao.ativar(potencialDeAtivacao);
 	}
 
+	public Double derivada(){
+		return this.funcaoDeAtivacao.derivada(potencialDeAtivacao);
+	}
 	
 	/**
 	 * @return the pesos
