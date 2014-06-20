@@ -20,7 +20,7 @@ public class CamadaIntermediaria extends Camada {
 			for (int j = 0; j < camada.getNeuronios().size(); j++) {
 				somaTemp += camada.getNeuronios().get(j).getPesos()[i] * camada.vetorGradiente[j];
 			}
-			vetorGradiente[i] = neuronios.get(i).derivada() * somaTemp;
+			vetorGradiente[i] = somaTemp;
 		}
 	}
 	

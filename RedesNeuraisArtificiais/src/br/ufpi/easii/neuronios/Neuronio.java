@@ -47,9 +47,9 @@ public class Neuronio {
 		}
 	}
 	
-	public void ajustarPesos(Double taxaDeAprendizado, Double[] x, Double gradiente){
+	public void ajustarPesos(Double taxaDeAprendizado, Double[] vetorEntrada, Double gradiente){
 		for (int i = 0; i < this.getPesos().length; i++) {
-			this.pesos[i] += taxaDeAprendizado * gradiente * x[i]; 
+			this.pesos[i] += taxaDeAprendizado * gradiente * vetorEntrada[i]; 
 		}
 	}
 	
