@@ -24,6 +24,7 @@ public class MultiLayerPerceptron {
 		
 	}
 	
+	@SuppressWarnings("unused")
 	public void treinamento(Double[][] amostras, Double[][] esperado, double taxaDeAprendizado, double precisao){
 		double erroAnterior, erroTemp;
 		inicializarPesos(amostras[0].length);
@@ -32,6 +33,8 @@ public class MultiLayerPerceptron {
 		do{
 			erroTemp = 0.0;
 			erroAnterior = this.erroMedio;
+			
+			/*Irá percorrer todas as amostras e calcular o erro médio*/
 			for(int i=0; i<amostras.length; i++){
 				camadasIntermediarias.get(0).combinarEntradas(amostras[i]);
 				camadasIntermediarias.get(0).gerarSaidas();
@@ -47,8 +50,9 @@ public class MultiLayerPerceptron {
 				erroTemp += calcularErro(esperado[i]);
 			}
 			erroMedio = erroTemp/amostras.length;
+			System.out.println("ErroMédio " + erroMedio + "\n");
 			quantEpocas++;
-		} while(Math.abs(this.erroMedio-erroAnterior)>precisao);
+		} while(Math.abs(this.erroMedio)>precisao);
 		
 		imprimirCamadaDeSaida();
 		

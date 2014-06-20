@@ -4,6 +4,7 @@
 package br.ufpi.easii.camadas;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import br.ufpi.easii.neuronios.Neuronio;
@@ -37,7 +38,7 @@ public class Camada {
 	}
 
 	public void combinarEntradas(Double[] entradas) {
-		for (int i = 0; i < entradas.length; i++) {
+		for (int i = 0; i < this.quantNeuronios; i++) {
 			neuronios.get(i).somatorio(entradas);
 			this.vetorEntrada[i] = neuronios.get(i).getPotencialDeAtivacao();
 		} 
@@ -140,6 +141,19 @@ public class Camada {
 	 */
 	public void setGradiente(Double[] vetorGradiente) {
 		this.vetorGradiente = vetorGradiente;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Camada [\nvetorEntrada="
+				+ Arrays.toString(vetorEntrada) + ", \nvetorSaida="
+				+ Arrays.toString(vetorSaida) + ", \nquantNeuronios="
+				+ quantNeuronios + ", \nvetorGradiente="
+				+ Arrays.toString(vetorGradiente) + ", \ngradienteCamada="
+				+ gradienteCamada + "]";
 	}
 	
 	

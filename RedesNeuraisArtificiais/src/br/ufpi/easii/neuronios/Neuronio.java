@@ -6,7 +6,7 @@ package br.ufpi.easii.neuronios;
 import java.util.Random;
 
 import br.ufpi.easii.funcaoDeAtivacao.AbstractFunction;
-import br.ufpi.easii.funcaoDeAtivacao.FuncaoDegrau;
+import br.ufpi.easii.funcaoDeAtivacao.FuncaoSigmoid;
 
 /**
  * @author Ronyerison
@@ -36,7 +36,13 @@ public class Neuronio {
 	
 	public Neuronio() {
 		this.potencialDeAtivacao = 0.0;
-		this.funcaoDeAtivacao = new FuncaoDegrau();
+		this.funcaoDeAtivacao = new FuncaoSigmoid();
+		this.pesoBias = new Random().nextDouble()*1;
+	}
+	
+	public Neuronio(AbstractFunction funcaoDeAtivacao){
+		this.potencialDeAtivacao = 0.0;
+		this.funcaoDeAtivacao = funcaoDeAtivacao;
 		this.pesoBias = new Random().nextDouble()*1;
 	}
 	

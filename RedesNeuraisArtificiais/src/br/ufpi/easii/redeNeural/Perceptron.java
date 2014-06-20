@@ -3,6 +3,7 @@
  */
 package br.ufpi.easii.redeNeural;
 
+import br.ufpi.easii.funcaoDeAtivacao.FuncaoDegrau;
 import br.ufpi.easii.neuronios.Neuronio;
 
 /**
@@ -10,10 +11,11 @@ import br.ufpi.easii.neuronios.Neuronio;
  *
  */
 public class Perceptron extends Neuronio{
+	@SuppressWarnings("unused")
 	private int quantEpocas;
 	
 	public Perceptron() {
-		super();
+		super(new FuncaoDegrau());
 	}
 	
 	public void treinamento(Double[][] entradas, Double[] saidaDesejada, 

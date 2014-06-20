@@ -3,12 +3,8 @@
  */
 package br.ufpi.easii.testes;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
-import br.ufpi.easii.camadas.Camada;
-import br.ufpi.easii.neuronios.Neuronio;
 import br.ufpi.easii.redeNeural.MultiLayerPerceptron;
 import br.ufpi.easii.redeNeural.Perceptron;
 
@@ -51,6 +47,6 @@ public class TestePerceptron {
 		saidaDesejada[3][0] = 0.0;
 		
 		multiLayerPerceptron.treinamento(entradas, saidaDesejada, 0.05, 0.01);
-		multiLayerPerceptron.executar(entradas[0]);
+		multiLayerPerceptron.executar(entradas[3]);
 	}
 }
