@@ -3,6 +3,7 @@
  */
 package br.ufpi.easii.neuronios;
 
+import java.util.Arrays;
 import java.util.Random;
 
 import br.ufpi.easii.funcaoDeAtivacao.AbstractFunction;
@@ -57,6 +58,7 @@ public class Neuronio {
 		for (int i = 0; i < this.getPesos().length; i++) {
 			this.pesos[i] += taxaDeAprendizado * gradiente * vetorEntrada[i]; 
 		}
+		this.pesoBias += taxaDeAprendizado * gradiente * -1;
 	}
 	
 	public void somatorio(Double[] conexoes){
@@ -144,6 +146,13 @@ public class Neuronio {
 	 */
 	public void setSaida(Double saida) {
 		this.saida = saida;
+	}
+
+	@Override
+	public String toString() {
+		return "Neuronio [pesos=" + Arrays.toString(pesos)
+				+ ", potencialDeAtivacao=" + potencialDeAtivacao
+				+ ", pesoBias=" + pesoBias + ", saida=" + saida + "]";
 	}
 	
 	

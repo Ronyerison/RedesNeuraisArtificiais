@@ -45,14 +45,15 @@ public class MultiLayerPerceptron {
 				camadaDeSaida.combinarEntradas(camadasIntermediarias.get(camadasIntermediarias.size()-1).getVetorSaida());
 				camadaDeSaida.gerarSaidas();
 				camadaDeSaida.calcularGradiente(esperado[i]);
+				
 				camadaDeSaida.ajustarPesos(taxaDeAprendizado, camadasIntermediarias.get(camadasIntermediarias.size()-1).getVetorSaida());
 				ajustarCamadasIntermediarias(amostras, taxaDeAprendizado, i);
-				erroTemp += calcularErro(esperado[i]);
+				erroTemp += Math.abs(calcularErro(esperado[i]));
 			}
 			erroMedio = erroTemp/amostras.length;
 //			System.out.println("ErroMédio " + erroMedio + "\n");
 			quantEpocas++;
-		} while(Math.abs(this.erroMedio)>precisao);
+		} while(this.erroMedio>precisao);
 		
 		imprimirCamadaDeSaida();
 		

@@ -33,7 +33,7 @@ public class TestePerceptron {
 	
 	@Test
 	public void testMultiLayerPerceptron(){
-		Integer[] vet = {2,3,1};
+		Integer[] vet = {2,1};
 		MultiLayerPerceptron multiLayerPerceptron = new MultiLayerPerceptron(vet);
 		
 		Double[][] entradas = new Double[4][2];
