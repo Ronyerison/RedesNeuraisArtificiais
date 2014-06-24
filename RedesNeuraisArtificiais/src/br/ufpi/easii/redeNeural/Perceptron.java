@@ -30,17 +30,19 @@ public class Perceptron extends Neuronio{
 		boolean erro;
 		do{
 			erro = false;
-			//strResult.append("EPOCA " + quantEpocas);
-			//strResult.append("\nPesos Atuais:" + Arrays.toString(getPesos()) + "\n");
+			strResult.append("EPOCA " + quantEpocas);
+			strResult.append("\nPesos Atuais:" + Arrays.toString(getPesos()) + "\n");
 			for(int i=0;i<saidaDesejada.length;i++){
 				somatorio(entradas[i]);
 				ativarNeuronio();
-				//strResult.append("Saida Desejada: " + saidaDesejada[i]);
-				//strResult.append("Saida Atual: " + saida);
-				if(this.saida != saidaDesejada[i]){
+				strResult.append("Saida Desejada: " + saidaDesejada[i]);
+				strResult.append("Saida Atual: " + saida+"\n");
+//				System.out.println("Saida = "+this.saida.intValue()+"\nSaida Desejada = "+saidaDesejada[i].intValue());
+				
+				if(this.saida.intValue() != saidaDesejada[i].intValue()){
 					recalculaPeso(taxaDeAprendizagem, saidaDesejada[i], entradas[i]);
 					erro = true;
-					//strResult.append("\nAtualizando Pesos: " + Arrays.toString(getPesos()) +"\n");
+					strResult.append("\nAtualizando Pesos: " + Arrays.toString(getPesos()) +"\n");
 				}
 			}
 			

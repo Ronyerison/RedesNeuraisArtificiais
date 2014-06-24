@@ -50,7 +50,7 @@ public class MultiLayerPerceptron {
 				erroTemp += calcularErro(esperado[i]);
 			}
 			erroMedio = erroTemp/amostras.length;
-			System.out.println("ErroMédio " + erroMedio + "\n");
+//			System.out.println("ErroMédio " + erroMedio + "\n");
 			quantEpocas++;
 		} while(Math.abs(this.erroMedio)>precisao);
 		
