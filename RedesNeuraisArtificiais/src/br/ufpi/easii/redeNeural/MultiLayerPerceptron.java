@@ -1,8 +1,10 @@
 package br.ufpi.easii.redeNeural;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import br.ufpi.easii.camadas.Camada;
 import br.ufpi.easii.camadas.CamadaDeSaida;
 import br.ufpi.easii.camadas.CamadaIntermediaria;
 
@@ -13,6 +15,7 @@ public class MultiLayerPerceptron {
 	private CamadaDeSaida camadaDeSaida;
 	private int quantEpocas;
 	private double erroMedio;
+	private StringBuffer strResult;
 	
 	public MultiLayerPerceptron(Integer[] camadas) {
 		camadasIntermediarias = new ArrayList<CamadaIntermediaria>();
@@ -21,15 +24,27 @@ public class MultiLayerPerceptron {
 			camadasIntermediarias.add(ci);
 		}
 		camadaDeSaida = new CamadaDeSaida(camadas[camadas.length-1]);
-		
+		strResult = new StringBuffer("");
 	}
 	
 	@SuppressWarnings("unused")
 	public void treinamento(Double[][] amostras, Double[][] esperado, double taxaDeAprendizado, double precisao){
 		double erroAnterior, erroTemp;
 		inicializarPesos(amostras[0].length);
+		
+		
 		this.erroMedio = 0.0;
 		this.quantEpocas = 0;
+		
+		strResult.append("--------------------- Treinamento -------------------\n");
+		strResult.append("Pesos Iniciais \n");
+		for (int i = 0; i < camadasIntermediarias.size(); i++) {
+			strResult.append("Camada " + i + "\n");
+			pesosCamada(camadasIntermediarias.get(i));
+		}
+		strResult.append("Camada de Saida\n");
+		pesosCamada(camadaDeSaida);
+		
 		do{
 			erroTemp = 0.0;
 			erroAnterior = this.erroMedio;
@@ -53,6 +68,14 @@ public class MultiLayerPerceptron {
 			erroMedio = erroTemp/amostras.length;
 			quantEpocas++;
 		} while(this.erroMedio>precisao);
+		
+		strResult.append("\nPesos Finais \n");
+		for (int i = 0; i < camadasIntermediarias.size(); i++) {
+			strResult.append("Camada " + i + "\n");
+			pesosCamada(camadasIntermediarias.get(i));
+		}
+		strResult.append("Camada de Saida\n");
+		pesosCamada(camadaDeSaida);
 		
 		imprimirCamadaDeSaida();
 		
@@ -110,6 +133,8 @@ public class MultiLayerPerceptron {
 	}
 	public void inicializarPesos(int tam){
 		camadasIntermediarias.get(0).gerarPesos(tam);
+		
+		
 		for(int i=1; i<camadasIntermediarias.size(); i++){
 			camadasIntermediarias.get(i).gerarPesos(camadasIntermediarias.get(i-1).getQuantNeuronios());
 		}
@@ -153,5 +178,53 @@ public class MultiLayerPerceptron {
 	 */
 	public void setCamadaDeSaida(CamadaDeSaida camadaDeSaida) {
 		this.camadaDeSaida = camadaDeSaida;
+	}
+
+	/**
+	 * @return the strResult
+	 */
+	public StringBuffer getStrResult() {
+		return strResult;
+	}
+
+	/**
+	 * @param strResult the strResult to set
+	 */
+	public void setStrResult(StringBuffer strResult) {
+		this.strResult = strResult;
+	}
+
+	/**
+	 * @return the quantEpocas
+	 */
+	public int getQuantEpocas() {
+		return quantEpocas;
+	}
+
+	/**
+	 * @param quantEpocas the quantEpocas to set
+	 */
+	public void setQuantEpocas(int quantEpocas) {
+		this.quantEpocas = quantEpocas;
+	}
+
+	/**
+	 * @return the erroMedio
+	 */
+	public double getErroMedio() {
+		return erroMedio;
+	}
+
+	/**
+	 * @param erroMedio the erroMedio to set
+	 */
+	public void setErroMedio(double erroMedio) {
+		this.erroMedio = erroMedio;
+	}
+	
+	public void pesosCamada(Camada camada){
+		for (int i = 0; i < camada.getQuantNeuronios(); i++) {
+			strResult.append("Peso Neuronio " + i + " "+ Arrays.toString(camada.getNeuronios().get(i).getPesos()) +"\n");
+		}
 	}
 }
