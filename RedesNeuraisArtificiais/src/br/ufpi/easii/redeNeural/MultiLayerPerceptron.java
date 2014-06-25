@@ -92,7 +92,7 @@ public class MultiLayerPerceptron {
 		
 		camadaDeSaida.combinarEntradas(camadasIntermediarias.get(camadasIntermediarias.size()-1).getVetorSaida());
 		camadaDeSaida.gerarSaidas();
-		
+		strResult.append("\nSaida " + Arrays.toString(camadaDeSaida.getVetorSaida()));
 		imprimeVetor(camadaDeSaida.getVetorSaida());
 	}
 	

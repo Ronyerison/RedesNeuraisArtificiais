@@ -27,6 +27,7 @@ public class TelaPrincipal {
 	private MultiLayerPerceptron neuralNetwork;
 	private JTextField textField_1;
 	private JTextField textField_2;
+	private Double[] entradas;
 
 	/**
 	 * Launch the application.
@@ -55,7 +56,7 @@ public class TelaPrincipal {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		
+		entradas = new Double[2];
 		Integer[] camadas = {2,1};
 		neuralNetwork = new MultiLayerPerceptron(camadas);
 		
@@ -111,6 +112,15 @@ public class TelaPrincipal {
 		frame.getContentPane().add(lblX_1);
 		
 		JButton btnExecutar = new JButton("Executar");
+		btnExecutar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				entradas[0] = Double.parseDouble(textField_1.getText());
+				entradas[1] = Double.parseDouble(textField_2.getText());
+				
+				neuralNetwork.executar(entradas);
+				textArea.setText(neuralNetwork.getStrResult().toString());
+			}
+		});
 		btnExecutar.setBounds(583, 341, 89, 23);
 		frame.getContentPane().add(btnExecutar);
 		
