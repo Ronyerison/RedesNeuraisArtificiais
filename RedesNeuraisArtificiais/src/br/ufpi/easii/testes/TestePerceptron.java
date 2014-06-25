@@ -49,8 +49,8 @@ public class TestePerceptron {
 		saidaDesejada[3][0] = 0.0;
 		
 		multiLayerPerceptron.treinamento(entradas, saidaDesejada, 0.5, 0.01);
-		for(int i=0; i<4; i++){
-			multiLayerPerceptron.executar(entradas[i]);
-		}
+//		for(int i=0; i<4; i++){
+			multiLayerPerceptron.executar(entradas[1]);
+//		}
 	}
 }
