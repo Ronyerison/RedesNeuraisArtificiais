@@ -11,7 +11,14 @@ public class FuncaoSigmoid extends AbstractFunction{
 
 	@Override
 	public Double ativar(Double u) {
-		return 1 / (1 + StrictMath.exp(-u));
+		Double saida = 1 / (1 + StrictMath.exp(-u));
+//		if(saida >= 0.7){
+//			saida = 1.0;
+//		}
+//		if(saida <= 0.3){
+//			saida = 0.0;
+//		}
+		return saida;
 	}
 
 	@Override

@@ -56,9 +56,9 @@ public class Neuronio {
 	
 	public void ajustarPesos(Double taxaDeAprendizado, Double[] vetorEntrada, Double gradiente){
 		for (int i = 0; i < this.getPesos().length; i++) {
-			this.pesos[i] += taxaDeAprendizado * gradiente * vetorEntrada[i]; 
+			this.pesos[i] += taxaDeAprendizado * gradiente * vetorEntrada[i] * funcaoDeAtivacao.derivada(potencialDeAtivacao); 
 		}
-		this.pesoBias += taxaDeAprendizado * gradiente * -1;
+		this.pesoBias += taxaDeAprendizado * gradiente * -1 * funcaoDeAtivacao.derivada(potencialDeAtivacao);
 	}
 	
 	public void somatorio(Double[] conexoes){

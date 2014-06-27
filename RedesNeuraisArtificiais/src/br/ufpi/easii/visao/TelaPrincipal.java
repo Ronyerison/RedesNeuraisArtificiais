@@ -28,6 +28,7 @@ public class TelaPrincipal {
 	private JTextField textField_2;
 	private Double[] entradas;
 	private TelaPesos telaPesos;
+	private Double taxaDeAprendizado;
 
 	/**
 	 * Launch the application.
@@ -154,6 +155,8 @@ public class TelaPrincipal {
 		saidaDesejada[2][0] = 1.0;
 		saidaDesejada[3][0] = 1.0;
 		
+		taxaDeAprendizado = 0.5;
+		
 		if(neuralNetwork.pesosSetados){
 			Double[] pesos1 = new Double[2];
 			Double[] pesos2 = new Double[2];
@@ -167,10 +170,11 @@ public class TelaPrincipal {
 			pesos3[1] = Double.parseDouble(telaPesos.strCampos.get(5));
 			
 			neuralNetwork.setarPesos(pesos1, pesos2, pesos3);
+//			taxaDeAprendizado = Double.parseDouble(telaPesos.strCampos.get(6));
 		}
 		
 		
-		neuralNetwork.treinamento(entradas, saidaDesejada, 0.5, 0.01);
+		neuralNetwork.treinamento(entradas, saidaDesejada, taxaDeAprendizado, 0.09);
 	}
 	
 	public void treinarSegundaQuestao(){
@@ -186,6 +190,8 @@ public class TelaPrincipal {
 		saidaDesejada[2][0] = 1.0;
 		saidaDesejada[3][0] = 0.0;
 		
+		taxaDeAprendizado = 0.5;
+		
 		if(neuralNetwork.pesosSetados){
 			Double[] pesos1 = new Double[2];
 			Double[] pesos2 = new Double[2];
@@ -199,8 +205,9 @@ public class TelaPrincipal {
 			pesos3[1] = Double.parseDouble(telaPesos.strCampos.get(5));
 			
 			neuralNetwork.setarPesos(pesos1, pesos2, pesos3);
+//			taxaDeAprendizado = Double.parseDouble(telaPesos.strCampos.get(6));
 		}
 		
-		neuralNetwork.treinamento(entradas, saidaDesejada, 0.5, 0.01);
+		neuralNetwork.treinamento(entradas, saidaDesejada, taxaDeAprendizado, 0.09);
 	}
 }
