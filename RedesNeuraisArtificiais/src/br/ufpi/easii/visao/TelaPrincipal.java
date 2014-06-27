@@ -23,11 +23,11 @@ import javax.swing.JMenuItem;
 public class TelaPrincipal {
 
 	private JFrame frame;
-	private JTextField textField;
 	private MultiLayerPerceptron neuralNetwork;
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private Double[] entradas;
+	private TelaPesos telaPesos;
 
 	/**
 	 * Launch the application.
@@ -79,16 +79,22 @@ public class TelaPrincipal {
 				textArea.setText(neuralNetwork.getStrResult().toString());
 			}
 		});
-		btnPerceptron.setBounds(559, 73, 129, 23);
+		btnPerceptron.setBounds(539, 81, 160, 23);
 		frame.getContentPane().add(btnPerceptron);
 		
-		textField = new JTextField();
-		textField.setBounds(633, 266, 86, 20);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
-		
-		JButton btnSetPesos = new JButton("Set Pesos");
-		btnSetPesos.setBounds(525, 265, 89, 23);
+		JButton btnSetPesos = new JButton("Configurar Rede");
+		btnSetPesos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				telaPesos = new TelaPesos();
+				telaPesos.frmConfigurarRede.setVisible(true);
+				
+				
+				
+				neuralNetwork.pesosSetados = true;
+			
+			}
+		});
+		btnSetPesos.setBounds(539, 23, 160, 23);
 		frame.getContentPane().add(btnSetPesos);
 		
 		textField_1 = new JTextField();
@@ -131,7 +137,7 @@ public class TelaPrincipal {
 				textArea.setText(neuralNetwork.getStrResult().toString());
 			}
 		});
-		btnNewButton.setBounds(559, 143, 129, 23);
+		btnNewButton.setBounds(539, 115, 160, 23);
 		frame.getContentPane().add(btnNewButton);
 	}
 	
@@ -148,6 +154,22 @@ public class TelaPrincipal {
 		saidaDesejada[2][0] = 1.0;
 		saidaDesejada[3][0] = 1.0;
 		
+		if(neuralNetwork.pesosSetados){
+			Double[] pesos1 = new Double[2];
+			Double[] pesos2 = new Double[2];
+			Double[] pesos3 = new Double[2];
+			
+			pesos1[0] = Double.parseDouble(telaPesos.strCampos.get(0));
+			pesos1[1] = Double.parseDouble(telaPesos.strCampos.get(1));
+			pesos2[0] = Double.parseDouble(telaPesos.strCampos.get(2));
+			pesos2[1] = Double.parseDouble(telaPesos.strCampos.get(3));
+			pesos3[0] = Double.parseDouble(telaPesos.strCampos.get(4));
+			pesos3[1] = Double.parseDouble(telaPesos.strCampos.get(5));
+			
+			neuralNetwork.setarPesos(pesos1, pesos2, pesos3);
+		}
+		
+		
 		neuralNetwork.treinamento(entradas, saidaDesejada, 0.5, 0.01);
 	}
 	
@@ -163,6 +185,21 @@ public class TelaPrincipal {
 		saidaDesejada[1][0] = 1.0;
 		saidaDesejada[2][0] = 1.0;
 		saidaDesejada[3][0] = 0.0;
+		
+		if(neuralNetwork.pesosSetados){
+			Double[] pesos1 = new Double[2];
+			Double[] pesos2 = new Double[2];
+			Double[] pesos3 = new Double[2];
+			
+			pesos1[0] = Double.parseDouble(telaPesos.strCampos.get(0));
+			pesos1[1] = Double.parseDouble(telaPesos.strCampos.get(1));
+			pesos2[0] = Double.parseDouble(telaPesos.strCampos.get(2));
+			pesos2[1] = Double.parseDouble(telaPesos.strCampos.get(3));
+			pesos3[0] = Double.parseDouble(telaPesos.strCampos.get(4));
+			pesos3[1] = Double.parseDouble(telaPesos.strCampos.get(5));
+			
+			neuralNetwork.setarPesos(pesos1, pesos2, pesos3);
+		}
 		
 		neuralNetwork.treinamento(entradas, saidaDesejada, 0.5, 0.01);
 	}

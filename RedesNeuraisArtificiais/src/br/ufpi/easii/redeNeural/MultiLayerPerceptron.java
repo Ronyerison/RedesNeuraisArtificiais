@@ -16,6 +16,7 @@ public class MultiLayerPerceptron {
 	private int quantEpocas;
 	private double erroMedio;
 	private StringBuffer strResult;
+	public boolean pesosSetados;
 	
 	public MultiLayerPerceptron(Integer[] camadas) {
 		camadasIntermediarias = new ArrayList<CamadaIntermediaria>();
@@ -25,13 +26,16 @@ public class MultiLayerPerceptron {
 		}
 		camadaDeSaida = new CamadaDeSaida(camadas[camadas.length-1]);
 		strResult = new StringBuffer("");
+		pesosSetados = false;
 	}
 	
 	@SuppressWarnings("unused")
 	public void treinamento(Double[][] amostras, Double[][] esperado, double taxaDeAprendizado, double precisao){
 		double erroAnterior, erroTemp;
-		inicializarPesos(amostras[0].length);
-		
+
+		if(!pesosSetados){
+			inicializarPesos(amostras[0].length);
+		}
 		
 		this.erroMedio = 0.0;
 		this.quantEpocas = 0;
@@ -202,29 +206,23 @@ public class MultiLayerPerceptron {
 	}
 
 	/**
-	 * @param quantEpocas the quantEpocas to set
-	 */
-	public void setQuantEpocas(int quantEpocas) {
-		this.quantEpocas = quantEpocas;
-	}
-
-	/**
 	 * @return the erroMedio
 	 */
 	public double getErroMedio() {
 		return erroMedio;
 	}
 
-	/**
-	 * @param erroMedio the erroMedio to set
-	 */
-	public void setErroMedio(double erroMedio) {
-		this.erroMedio = erroMedio;
-	}
-	
 	public void pesosCamada(Camada camada){
 		for (int i = 0; i < camada.getQuantNeuronios(); i++) {
 			strResult.append("Peso Neuronio " + i + " "+ Arrays.toString(camada.getNeuronios().get(i).getPesos()) +"\n");
 		}
+	}
+	
+	public void setarPesos(Double[] pesos1, Double[] pesos2, Double[] pesos3){
+		inicializarPesos(2);
+		camadasIntermediarias.get(0).getNeuronios().get(0).setPesos(pesos1);
+		camadasIntermediarias.get(0).getNeuronios().get(1).setPesos(pesos2);
+		camadaDeSaida.getNeuronios().get(0).setPesos(pesos3);
+		
 	}
 }
