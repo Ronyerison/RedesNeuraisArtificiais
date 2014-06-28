@@ -24,12 +24,13 @@ public class TelaPrincipal {
 
 	private JFrame frame;
 	private MultiLayerPerceptron neuralNetwork;
+	private Perceptron perceptron;
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private Double[] entradas;
 	private TelaPesos telaPesos;
 	private Double taxaDeAprendizado;
-
+	private Integer questao;
 	/**
 	 * Launch the application.
 	 */
@@ -60,6 +61,7 @@ public class TelaPrincipal {
 		entradas = new Double[2];
 		Integer[] camadas = {2,1};
 		neuralNetwork = new MultiLayerPerceptron(camadas);
+		perceptron = new Perceptron();
 		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 759, 435);
@@ -77,7 +79,7 @@ public class TelaPrincipal {
 		btnPerceptron.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				treinarPrimeiraQuestao();
-				textArea.setText(neuralNetwork.getStrResult().toString());
+				textArea.setText(perceptron.getStrResult().toString());
 			}
 		});
 		btnPerceptron.setBounds(539, 81, 160, 23);
@@ -92,7 +94,7 @@ public class TelaPrincipal {
 				
 				
 				neuralNetwork.pesosSetados = true;
-			
+				perceptron.pesosSetados = true;
 			}
 		});
 		btnSetPesos.setBounds(539, 23, 160, 23);
@@ -123,9 +125,15 @@ public class TelaPrincipal {
 			public void actionPerformed(ActionEvent e) {
 				entradas[0] = Double.parseDouble(textField_1.getText());
 				entradas[1] = Double.parseDouble(textField_2.getText());
+				if(questao == 2){
+					neuralNetwork.executar(entradas);
+					textArea.setText(neuralNetwork.getStrResult().toString());
+				}
+				if(questao == 1){
+					perceptron.executar(entradas);
+					textArea.setText(perceptron.getStrResult().toString());
+				}
 				
-				neuralNetwork.executar(entradas);
-				textArea.setText(neuralNetwork.getStrResult().toString());
 			}
 		});
 		btnExecutar.setBounds(583, 341, 89, 23);
@@ -143,21 +151,23 @@ public class TelaPrincipal {
 	}
 	
 	public void treinarPrimeiraQuestao(){
+		questao = 1;
+		
 		Double[][] entradas = new Double[4][2];
 		entradas[0][0] = 0.0; entradas[0][1] = 0.0;
 		entradas[1][0] = 0.0; entradas[1][1] = 1.0;
 		entradas[2][0] = 1.0; entradas[2][1] = 0.0;
 		entradas[3][0] = 1.0; entradas[3][1] = 1.0;
 		
-		Double[][] saidaDesejada = new Double[4][1];
-		saidaDesejada[0][0] = 0.0;
-		saidaDesejada[1][0] = 0.0;
-		saidaDesejada[2][0] = 1.0;
-		saidaDesejada[3][0] = 1.0;
+		Double[] saidaDesejada = new Double[4];
+		saidaDesejada[0] = 0.0;
+		saidaDesejada[1] = 0.0;
+		saidaDesejada[2] = 1.0;
+		saidaDesejada[3] = 1.0;
 		
 		taxaDeAprendizado = 0.5;
 		
-		if(neuralNetwork.pesosSetados){
+		if(perceptron.pesosSetados){
 			Double[] pesos1 = new Double[2];
 			Double[] pesos2 = new Double[2];
 			Double[] pesos3 = new Double[2];
@@ -169,15 +179,17 @@ public class TelaPrincipal {
 			pesos3[0] = Double.parseDouble(telaPesos.strCampos.get(4));
 			pesos3[1] = Double.parseDouble(telaPesos.strCampos.get(5));
 			
-			neuralNetwork.setarPesos(pesos1, pesos2, pesos3);
+//			neuralNetwork.setarPesos(pesos1, pesos2, pesos3);
+			perceptron.setPesos(pesos1);
 			taxaDeAprendizado = Double.parseDouble(telaPesos.strCampos.get(6));
 		}
 		
 		
-		neuralNetwork.treinamento(entradas, saidaDesejada, taxaDeAprendizado, 0.09);
+		perceptron.treinamento(entradas, saidaDesejada, taxaDeAprendizado);
 	}
 	
 	public void treinarSegundaQuestao(){
+		questao = 2;
 		Double[][] entradas = new Double[4][2];
 		entradas[0][0] = 0.0; entradas[0][1] = 0.0;
 		entradas[1][0] = 0.0; entradas[1][1] = 1.0;

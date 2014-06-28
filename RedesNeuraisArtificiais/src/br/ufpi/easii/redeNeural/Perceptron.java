@@ -16,17 +16,22 @@ public class Perceptron extends Neuronio{
 	
 	private int quantEpocas;
 	private StringBuffer strResult;
+	public boolean pesosSetados;
 	
 	public Perceptron() {
 		super(new FuncaoDegrau());
 		this.quantEpocas = 0;
 		strResult = new StringBuffer("");
+		pesosSetados = false;
 	}
 	
 	public void treinamento(Double[][] entradas, Double[] saidaDesejada, 
 			Double taxaDeAprendizagem ){
 		strResult.append("--------------------Treinamento--------------------\n");
-		gerarPesos(entradas[0].length);
+		if(!pesosSetados){
+			gerarPesos(entradas[0].length);
+		}
+		
 		boolean erro;
 		do{
 			erro = false;
@@ -55,9 +60,9 @@ public class Perceptron extends Neuronio{
 		somatorio(entradas);
 		ativarNeuronio();
 		if(this.saida == 0.0){
-			System.out.println("Jogador de Futebol");
+			strResult.append("\nJogador de Futebol == 0.0\n");
 		}else{
-			System.out.println("Jogador de Tênis");
+			strResult.append("\nJogador de Tênis == 1.0\n");
 		}
 	}
 	
