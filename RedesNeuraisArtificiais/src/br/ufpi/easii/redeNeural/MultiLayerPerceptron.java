@@ -40,7 +40,7 @@ public class MultiLayerPerceptron {
 		this.erroMedio = 0.0;
 		this.quantEpocas = 0;
 		
-		strResult.append("--------------------- Treinamento -------------------\n");
+		strResult.append("\n--------------------- Treinamento -------------------\n");
 		strResult.append("Pesos Iniciais \n");
 		for (int i = 0; i < camadasIntermediarias.size(); i++) {
 			strResult.append("Camada " + i + "\n");
@@ -72,7 +72,7 @@ public class MultiLayerPerceptron {
 			erroMedio = erroTemp/amostras.length;
 			quantEpocas++;
 		} while(this.erroMedio>precisao);
-		
+		strResult.append("\nTreinado por " + quantEpocas + " épocas.\n");
 		strResult.append("\nPesos Finais \n");
 		for (int i = 0; i < camadasIntermediarias.size(); i++) {
 			strResult.append("Camada " + i + "\n");

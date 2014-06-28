@@ -170,7 +170,7 @@ public class TelaPrincipal {
 			pesos3[1] = Double.parseDouble(telaPesos.strCampos.get(5));
 			
 			neuralNetwork.setarPesos(pesos1, pesos2, pesos3);
-//			taxaDeAprendizado = Double.parseDouble(telaPesos.strCampos.get(6));
+			taxaDeAprendizado = Double.parseDouble(telaPesos.strCampos.get(6));
 		}
 		
 		
@@ -205,7 +205,7 @@ public class TelaPrincipal {
 			pesos3[1] = Double.parseDouble(telaPesos.strCampos.get(5));
 			
 			neuralNetwork.setarPesos(pesos1, pesos2, pesos3);
-//			taxaDeAprendizado = Double.parseDouble(telaPesos.strCampos.get(6));
+			taxaDeAprendizado = Double.parseDouble(telaPesos.strCampos.get(6));
 		}
 		
 		neuralNetwork.treinamento(entradas, saidaDesejada, taxaDeAprendizado, 0.09);
