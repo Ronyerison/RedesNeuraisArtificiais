@@ -1,24 +1,19 @@
 package br.ufpi.easii.visao;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JButton;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import br.ufpi.easii.redeNeural.MultiLayerPerceptron;
 import br.ufpi.easii.redeNeural.Perceptron;
-
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 
 public class TelaPrincipal {
 
@@ -185,7 +180,7 @@ public class TelaPrincipal {
 		}
 		
 		
-		perceptron.treinamento(entradas, saidaDesejada, taxaDeAprendizado);
+		perceptron.treinamento(entradas, saidaDesejada, taxaDeAprendizado, 100);
 	}
 	
 	public void treinarSegundaQuestao(){

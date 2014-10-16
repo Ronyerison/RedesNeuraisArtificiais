@@ -25,7 +25,7 @@ public class TestePerceptron {
 		
 		Double[] saidaDesejada = {0.0,0.0,1.0,1.0};
 		
-		p.treinamento(entradas, saidaDesejada, 0.5);
+		p.treinamento(entradas, saidaDesejada, 0.5, 100);
 		for(int i=0; i<4; i++){
 			p.executar(entradas[i]);
 		}

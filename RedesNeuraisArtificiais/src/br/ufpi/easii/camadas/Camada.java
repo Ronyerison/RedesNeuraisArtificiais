@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import br.ufpi.easii.funcaoDeAtivacao.AbstractFunction;
 import br.ufpi.easii.neuronios.Neuronio;
 
 /**
@@ -70,6 +71,12 @@ public class Camada {
 	public void ajustarPesos(Double taxaDeAprendizado, Double[] vetorEntrada){
 		for (int i = 0; i < this.getQuantNeuronios(); i++) {
 			this.neuronios.get(i).ajustarPesos(taxaDeAprendizado, vetorEntrada, vetorGradiente[i]);
+		}
+	}
+	
+	public void ajustarPesosRandom(Double rand){
+		for (int i = 0; i < this.getQuantNeuronios(); i++) {
+			this.neuronios.get(i).ajustarPesosRandom(rand);
 		}
 	}
 	
@@ -143,6 +150,18 @@ public class Camada {
 		this.vetorGradiente = vetorGradiente;
 	}
 
+	public void setFuncaoDeAtivacao(AbstractFunction abstractFunction){
+		for (Neuronio neuronio : neuronios) {
+			neuronio.setFuncaoDeAtivacao(abstractFunction);
+		}
+	}
+	public Double[][] getPesos(){
+		Double[][] matriz = new Double[quantNeuronios][vetorEntrada.length];
+		for (int i = 0; i < quantNeuronios; i++) {
+			matriz[i] = this.neuronios.get(i).getPesos();
+		}
+		return matriz;
+	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */

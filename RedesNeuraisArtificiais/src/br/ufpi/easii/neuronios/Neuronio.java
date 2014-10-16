@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 import br.ufpi.easii.funcaoDeAtivacao.AbstractFunction;
-import br.ufpi.easii.funcaoDeAtivacao.FuncaoSigmoid;
+import br.ufpi.easii.funcaoDeAtivacao.FuncaoLogistica;
 
 /**
  * @author Ronyerison
@@ -20,6 +20,21 @@ public class Neuronio {
 	protected Double potencialDeAtivacao;
 	protected Double pesoBias;
 	protected Double saida;
+
+	
+	
+	/**
+	 * @param pesos
+	 * @param funcaoDeAtivacao
+	 * @param pesoBias
+	 */
+	public Neuronio(Double[] pesos, AbstractFunction funcaoDeAtivacao,
+			Double pesoBias) {
+		this.pesos = pesos;
+		this.potencialDeAtivacao = 0.0;
+		this.funcaoDeAtivacao = funcaoDeAtivacao;
+		this.pesoBias = pesoBias;
+	}
 
 	/**
 	 * @param pesos
@@ -37,7 +52,7 @@ public class Neuronio {
 	
 	public Neuronio() {
 		this.potencialDeAtivacao = 0.0;
-		this.funcaoDeAtivacao = new FuncaoSigmoid();
+		this.funcaoDeAtivacao = new FuncaoLogistica();
 		this.pesoBias = new Random().nextDouble()*1;
 	}
 	
@@ -59,6 +74,13 @@ public class Neuronio {
 			this.pesos[i] += taxaDeAprendizado * gradiente * vetorEntrada[i] * funcaoDeAtivacao.derivada(potencialDeAtivacao); 
 		}
 		this.pesoBias += taxaDeAprendizado * gradiente * -1 * funcaoDeAtivacao.derivada(potencialDeAtivacao);
+	}
+	
+	public void ajustarPesosRandom(Double rand){
+		for (int i = 0; i < this.getPesos().length; i++) {
+			this.pesos[i] += rand; 
+		}
+		this.pesoBias += rand;
 	}
 	
 	public void somatorio(Double[] conexoes){

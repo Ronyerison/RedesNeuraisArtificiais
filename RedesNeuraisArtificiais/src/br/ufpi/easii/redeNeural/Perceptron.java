@@ -3,8 +3,6 @@
  */
 package br.ufpi.easii.redeNeural;
 
-import java.util.Arrays;
-
 import br.ufpi.easii.funcaoDeAtivacao.FuncaoDegrau;
 import br.ufpi.easii.neuronios.Neuronio;
 
@@ -26,47 +24,47 @@ public class Perceptron extends Neuronio{
 	}
 	
 	public void treinamento(Double[][] entradas, Double[] saidaDesejada, 
-			Double taxaDeAprendizagem ){
-		strResult.append("--------------------Treinamento--------------------\n");
+			Double taxaDeAprendizagem, Integer maxEpocas ){
 		if(!pesosSetados){
 			gerarPesos(entradas[0].length);
 		}
-		
 		boolean erro;
 		do{
+			strResult.append("Epoca = ;"+ (quantEpocas) + "\nPesos = ;");
+			for (Double peso : pesos) {
+				strResult.append(peso.toString().replace(".", ",") + ";");
+			}
+			strResult.append("\n");
 			erro = false;
-			strResult.append("EPOCA " + quantEpocas);
-			strResult.append("\nPesos Atuais:" + Arrays.toString(getPesos()) + "\n");
 			for(int i=0;i<saidaDesejada.length;i++){
 				somatorio(entradas[i]);
 				ativarNeuronio();
-				strResult.append("Saida Desejada: " + saidaDesejada[i]);
-				strResult.append("Saida Atual: " + saida+"\n");
-//				System.out.println("Saida = "+this.saida.intValue()+"\nSaida Desejada = "+saidaDesejada[i].intValue());
 				
 				if(this.saida.intValue() != saidaDesejada[i].intValue()){
 					recalculaPeso(taxaDeAprendizagem, saidaDesejada[i], entradas[i]);
 					erro = true;
-					strResult.append("\nAtualizando Pesos: " + Arrays.toString(getPesos()) +"\n");
 				}
+				strResult.append("Amostra = ;"+ (i+1)+ ";Erro = ;" + erro + "\n");
 			}
 			
+			System.out.println(quantEpocas);
 			this.quantEpocas++;
-		}while(erro);
-		//System.out.println(quantEpocas);
+		}while(erro && this.quantEpocas < maxEpocas);
+
 	}
 
 	public void executar(Double[] entradas) {
 		somatorio(entradas);
 		ativarNeuronio();
-		if(this.saida == 0.0){
-			strResult.append("\nJogador de Futebol == 0.0\n");
-		}else{
-			strResult.append("\nJogador de Tênis == 1.0\n");
-		}
+		System.out.println("saida = " + this.saida);
+//		if(this.saida == -1.0){
+//		}else{
+//			System.out.println("saida = " + this.saida);
+//		}
 	}
 	
 	public void recalculaPeso(Double taxaDeAprendizagem, Double saidaDesejada, Double[] entradas) {
+		this.pesoBias += taxaDeAprendizagem*(saidaDesejada-this.saida)*-1;
 		for (int i = 0; i < pesos.length; i++) {
 			this.pesos[i] += taxaDeAprendizagem*(saidaDesejada-this.saida)*entradas[i];
 		}
@@ -100,5 +98,13 @@ public class Perceptron extends Neuronio{
 		this.strResult = strResult;
 	}
 	
+	public void zerarPesos(int tam){
+		this.pesos = new Double[tam];
+		for (int i = 0; i < this.pesos.length; i++) {
+			this.pesos[i] = 0.0;
+		}
+		this.pesoBias = 0.0;
+		this.pesosSetados = true;
+	}
 	
 }
